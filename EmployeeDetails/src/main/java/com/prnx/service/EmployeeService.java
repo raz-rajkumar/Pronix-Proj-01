@@ -29,4 +29,16 @@ public class EmployeeService {
 	{
 		return repository.findById(id).get();
 	}
+	
+	public List<Employee> update(Long id,Employee emp)
+	{
+		Optional<Employee> byId = repository.findById(id);
+		if(byId.isPresent())
+		{
+			repository.save(emp);
+			return repository.findAll();
+		}
+		return repository.findAll();
+	}
+	
 }
