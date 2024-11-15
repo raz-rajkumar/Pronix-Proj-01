@@ -35,10 +35,20 @@ public class EmployeeService {
 		Optional<Employee> byId = repository.findById(id);
 		if(byId.isPresent())
 		{
-			repository.save(emp);
+			Employee emp1=byId.get();
+			emp1.setEmpName(emp.getEmpName());
+			emp1.setEmpDepartment(emp.getEmpDepartment());
+			emp1.setEmpDesignation(emp.getEmpDesignation());
+			emp1.setEmpSalary(emp.getEmpSalary());
+			repository.save(emp1);
 			return repository.findAll();
 		}
 		return repository.findAll();
 	}
 	
+	public List<Employee> deleteEmployee(Long id)
+	{
+		repository.deleteById(id);
+		return repository.findAll();
+	}
 }
