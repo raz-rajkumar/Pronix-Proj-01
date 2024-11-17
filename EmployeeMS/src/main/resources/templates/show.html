@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Employee Details</title>
 </head>
 <body>
-	<table>
-		<tr th:each="emp:${employee}">
-			<th th:text=${emp.empId}/>
-			<th th:text=${emp.empName}/>
-			<th th:text=${emp.empDesignation}/>
-			<th th:text=${emp.empDepartment}/>
-			<th th:text=${emp.empSalary}/>
-		</tr>
-	</table>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Designation</th>
+                <th>Department</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="emp : ${employee}">
+                <td th:text="${emp.empId}"></td>
+                <td th:text="${emp.empName}"></td>
+                <td th:text="${emp.empDesignation}"></td>
+                <td th:text="${emp.empDepartment}"></td>
+                <td th:text="${emp.empSalary}"></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

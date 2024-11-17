@@ -1,6 +1,6 @@
 package com.prnx.sevice;
 
-import java.awt.List;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +13,12 @@ public class EmployeeService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	public List getEmployees()
+	public List<Object> getEmployees()
 	{
 		String api="http://localhost:8081/allEmployees";
 		UriComponentsBuilder uri=UriComponentsBuilder.fromHttpUrl(api);
 		
-		List employees=restTemplate.getForObject(uri.toUriString(), List.class);
+		List<Object> employees=restTemplate.getForObject(uri.toUriString(), List.class);
 		return employees;
 	}
 	
