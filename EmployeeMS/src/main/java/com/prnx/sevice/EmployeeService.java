@@ -1,11 +1,13 @@
 package com.prnx.sevice;
 
-import java.awt.List;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import com.prnx.model.Employee;
 
 @Service
 public class EmployeeService {
@@ -13,13 +15,23 @@ public class EmployeeService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	public List getEmployees()
+	public List<Object> getEmployees()
 	{
-		String api="http://localhost:8081/allEmployees";
-		UriComponentsBuilder uri=UriComponentsBuilder.fromHttpUrl(api);
+		String url="http://localhost:8081/allEmployees";
+		UriComponentsBuilder uri=UriComponentsBuilder.fromHttpUrl(url);
 		
-		List employees=restTemplate.getForObject(uri.toUriString(), List.class);
+		List<Object> employees=restTemplate.getForObject(uri.toUriString(), List.class);
 		return employees;
 	}
 	
+	
+	public List<Employee> saveEmployee(Employee emp)
+	{
+		String url="http://localhost:8081/save";
+		UriComponentsBuilder uri=UriComponentsBuilder.fromHttpUrl(url);
+		restTemplate.postForObject(uri.toUriString(), emp, Employee.class);
+		
+		List<Employee> employees=restTemplate.getForObject(uri.toUriString(), List.class);
+		return employees;
+	}
 }
