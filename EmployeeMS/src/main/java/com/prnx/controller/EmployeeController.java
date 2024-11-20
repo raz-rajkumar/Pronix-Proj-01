@@ -1,15 +1,16 @@
 package com.prnx.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.prnx.model.Employee;
 import com.prnx.sevice.EmployeeService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -27,7 +28,7 @@ public class EmployeeController {
 	@GetMapping("/addEmployee")
 	public String addEmployee(Model model)
 	{
-		model.addAttribute("Employee",new Employee());
+		model.addAttribute("employee",new Employee());
 		return "add_emp";
 	}
 	
@@ -40,10 +41,9 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/saveEmployee")
-	public String saveEmployee(@ModelAttribute Employee emp) {
-		service.saveEmployee(emp);
-				
-		return "redirect:show";
+	public String saveEmployee(@ModelAttribute Employee emp, Model model) {
+		List<Employee> emps= service.saveEmployee(emp);
+		return "redirect:/getAllEmployees";
 	}
 	
 }
