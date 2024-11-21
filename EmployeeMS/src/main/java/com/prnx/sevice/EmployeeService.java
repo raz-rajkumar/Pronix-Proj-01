@@ -11,27 +11,26 @@ import com.prnx.model.Employee;
 
 @Service
 public class EmployeeService {
-	
+
 	@Autowired
 	private RestTemplate restTemplate;
-	
-	public List<Object> getEmployees()
-	{
-		String url="http://localhost:8081/allEmployees";
-		UriComponentsBuilder uri=UriComponentsBuilder.fromHttpUrl(url);
-		
-		List<Object> employees=restTemplate.getForObject(uri.toUriString(), List.class);
+
+	public List<Object> getEmployees() {
+		String url = "http://localhost:8081/allEmployees";
+		UriComponentsBuilder uri = UriComponentsBuilder.fromHttpUrl(url);
+
+		List<Object> employees = restTemplate.getForObject(uri.toUriString(), List.class);
 		return employees;
 	}
-	
-	
-	public List<Employee> saveEmployee(Employee emp)
-	{
-		String url="http://localhost:8081/save";
-		UriComponentsBuilder uri=UriComponentsBuilder.fromHttpUrl(url);
-		restTemplate.postForObject(uri.toUriString(), emp, Employee.class);
-		
-		List<Employee> employees=restTemplate.getForObject(uri.toUriString(), List.class);
+
+	public List<Employee> saveEmployee(Employee emp) {
+		String url = "http://localhost:8081/save";
+
+		restTemplate.postForObject(url, emp, Employee.class);
+
+		UriComponentsBuilder uri = UriComponentsBuilder.fromHttpUrl(url);
+
+		List<Employee> employees = restTemplate.getForObject(uri.toUriString(), List.class);
 		return employees;
 	}
 }
