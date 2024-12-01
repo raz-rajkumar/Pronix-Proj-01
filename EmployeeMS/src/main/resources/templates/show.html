@@ -1,29 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Employee Details</title>
+<meta charset="UTF-8">
+<title>Employee Details</title>
 </head>
 <body>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Employee ID</th>
-                <th>Name</th>
-                <th>Designation</th>
-                <th>Department</th>
-                <th>Salary</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="emp : ${employee}">
-                <td th:text="${emp.empId}"></td>
-                <td th:text="${emp.empName}"></td>
-                <td th:text="${emp.empDesignation}"></td>
-                <td th:text="${emp.empDepartment}"></td>
-                <td th:text="${emp.empSalary}"></td>
-            </tr>
-        </tbody>
-    </table>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Employee ID</th>
+				<th>Name</th>
+				<th>Designation</th>
+				<th>Department</th>
+				<th>Salary</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="emp : ${employee}">
+				<td th:text="${emp.empId}"></td>
+				<td th:text="${emp.empName}"></td>
+				<td th:text="${emp.empDesignation}"></td>
+				<td th:text="${emp.empDepartment}"></td>
+				<td th:text="${emp.empSalary}"></td>
+			</tr>
+		</tbody>
+	</table>
+	=======
+	<h1>Employee Details</h1>
+	<a href="addEmployee">AddEmployee</a>
+	<table border="1" width="100%" align="center">
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Designation</th>
+			<th>Department</th>
+			<th>Salary</th>
+		</tr>
+		<tr th:each="emp: ${employee}" align="center">
+			<td th:text=${emp.empId} />
+			<td th:text=${emp.empName} />
+			<td th:text=${emp.empDesignation} />
+			<td th:text=${emp.empDepartment} />
+			<td th:text=${emp.empSalary} />
+		</tr>
+	</table>
 </body>
 </html>
