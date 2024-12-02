@@ -2,6 +2,7 @@ package com.prnx.config;
 
 import javax.sql.DataSource;
 
+import org.hibernate.sql.Delete;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -44,7 +45,10 @@ public class EmployeeSecurityConfiguration {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		http.authorizeHttpRequests(
-				configurer -> configurer.requestMatchers(HttpMethod.GET, "/allEmployees").hasRole("EMPLOYEE"));
+				configurer -> configurer.requestMatchers(HttpMethod.GET, "/allEmployees").permitAll()
+				.requestMatchers(HttpMethod.DELETE,"/deleteEmployee/**").hasRole("MANAGER")
+				.requestMatchers(HttpMethod.PUT,"/updateEmployee/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.POST,"/save").hasRole("ADMIN"));
 
 		http.httpBasic(Customizer.withDefaults());
 
