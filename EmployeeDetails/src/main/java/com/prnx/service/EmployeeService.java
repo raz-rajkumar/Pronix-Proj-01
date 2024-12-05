@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.prnx.entity.Employee;
+import com.prnx.exceptionHandling.EmployeeNotFoundException;
 import com.prnx.repository.EmployeeRepository;
 
 @Service
@@ -30,7 +31,7 @@ public class EmployeeService {
 		return repository.findById(id);
 	}
 	
-	public List<Employee> update(Long id,Employee emp)
+	public Employee update(Long id,Employee emp)
 	{
 		Optional<Employee> byId = repository.findById(id);
 		if(byId.isPresent())
@@ -41,14 +42,22 @@ public class EmployeeService {
 			emp1.setEmpDesignation(emp.getEmpDesignation());
 			emp1.setEmpSalary(emp.getEmpSalary());
 			repository.save(emp1);
-			return repository.findAll();
+			return repository.findById(id).get();
 		}
-		return repository.findAll();
+		else
+			throw new EmployeeNotFoundException("There is no Employee with id "+id+" to update details.");
 	}
 	
 	public List<Employee> deleteEmployee(Long id)
 	{
-		repository.deleteById(id);
-		return repository.findAll();
+		Optional<Employee> emp=repository.findById(id);
+		if(emp.isPresent())
+		{
+			repository.deleteById(id);
+			return repository.findAll();
+		}
+		else
+			throw new EmployeeNotFoundException("There is no Employee details with id "+id+" to delete.");
+		
 	}
 }

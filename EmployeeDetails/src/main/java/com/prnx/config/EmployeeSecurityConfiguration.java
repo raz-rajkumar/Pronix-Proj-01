@@ -37,23 +37,22 @@ public class EmployeeSecurityConfiguration {
 		// define query to retrieve the authorities/roles by username
 
 		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select username,role from roles where username=?");
-		
+
 		return jdbcUserDetailsManager;
 	}
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-		http.authorizeHttpRequests(
-				configurer -> configurer.requestMatchers(HttpMethod.GET, "/allEmployees").permitAll()
-				.requestMatchers(HttpMethod.DELETE,"/deleteEmployee/**").hasRole("MANAGER")
-				.requestMatchers(HttpMethod.PUT,"/updateEmployee/**").hasRole("ADMIN")
-				.requestMatchers(HttpMethod.POST,"/save").hasRole("ADMIN")
-				.requestMatchers(HttpMethod.GET,"/findEmployee/**").hasRole("ADMIN"));
-
-		http.httpBasic(Customizer.withDefaults());
-
-		http.csrf(csrf -> csrf.disable());
-		return http.build();
+		
+		return http.csrf(csrf -> csrf.disable())
+				.formLogin(Customizer.withDefaults())
+				.httpBasic(Customizer.withDefaults())
+				.authorizeHttpRequests(configurer -> configurer.requestMatchers("/allEmployees", "/home")
+				.permitAll()
+				.requestMatchers("/deleteEmployee/**")
+				.hasRole("MANAGER")
+				.requestMatchers("/save", "/updateEmployee/**", "/findEmployee/**")
+				.hasRole("ADMIN"))
+				.build();
 	}
 }
