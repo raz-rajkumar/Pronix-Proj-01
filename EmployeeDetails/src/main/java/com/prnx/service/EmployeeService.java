@@ -25,9 +25,9 @@ public class EmployeeService {
 		repository.save(emp);
 	}
 	
-	public Employee findEmployee(Long id)
+	public Optional<Employee> findEmployee(Long id)
 	{
-		return repository.findById(id).get();
+		return repository.findById(id);
 	}
 	
 	public List<Employee> update(Long id,Employee emp)
