@@ -41,7 +41,8 @@ public class StudentConfiguration {
 		http.authorizeHttpRequests(
 				configurer -> configurer.requestMatchers(HttpMethod.GET, "std/getAll").permitAll()
 				.requestMatchers(HttpMethod.DELETE,"std/delete/**").hasRole("MANAGER")
-				.requestMatchers(HttpMethod.PUT,"td/update/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.GET,"std/getById/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.PUT,"std/update/**").hasRole("ADMIN")
 				.requestMatchers(HttpMethod.POST,"std/save").hasRole("ADMIN"));
 
 		http.httpBasic(Customizer.withDefaults());
