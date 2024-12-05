@@ -44,7 +44,8 @@ public class EmployeeSecurityConfiguration {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
-		return http.csrf(csrf -> csrf.disable())
+		return http
+				.csrf(csrf -> csrf.disable())
 				.formLogin(Customizer.withDefaults())
 				.httpBasic(Customizer.withDefaults())
 				.authorizeHttpRequests(configurer -> configurer.requestMatchers("/allEmployees", "/home")
