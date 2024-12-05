@@ -48,7 +48,8 @@ public class EmployeeSecurityConfiguration {
 				configurer -> configurer.requestMatchers(HttpMethod.GET, "/allEmployees").permitAll()
 				.requestMatchers(HttpMethod.DELETE,"/deleteEmployee/**").hasRole("MANAGER")
 				.requestMatchers(HttpMethod.PUT,"/updateEmployee/**").hasRole("ADMIN")
-				.requestMatchers(HttpMethod.POST,"/save").hasRole("ADMIN"));
+				.requestMatchers(HttpMethod.POST,"/save").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.GET,"/findEmployee/**").hasRole("ADMIN"));
 
 		http.httpBasic(Customizer.withDefaults());
 

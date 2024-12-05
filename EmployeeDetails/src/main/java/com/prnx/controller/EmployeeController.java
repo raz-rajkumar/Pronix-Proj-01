@@ -1,6 +1,7 @@
 package com.prnx.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,7 +38,11 @@ public class EmployeeController {
 	@GetMapping("/findEmployee/{id}")
 	public Employee findEmployee(@PathVariable Long id )
 	{
-		return service.findEmployee(id);
+		Optional<Employee> emp=service.findEmployee(id);
+		if(emp.isPresent())
+			return emp.get();
+		
+		return null;
 	}
 	
 	
