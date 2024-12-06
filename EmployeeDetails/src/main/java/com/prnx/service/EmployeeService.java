@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.prnx.entity.Employee;
 import com.prnx.exceptionHandling.EmployeeNotFoundException;
+import com.prnx.exceptionHandling.NotEmptyException;
 import com.prnx.repository.EmployeeRepository;
 
 @Service
@@ -23,6 +24,18 @@ public class EmployeeService {
 	
 	public void save(Employee emp)
 	{
+//		if(emp.getEmpName()==null)
+//			throw new NotEmptyException("Employee Name should not be empty.");
+//		
+//		if(emp.getEmpDepartment()==null)
+//			throw new NotEmptyException("Employee Department should not be empty.");
+//		
+//		if(emp.getEmpDesignation()==null)
+//			throw new NotEmptyException("Employee Designation should not be empty.");
+//		
+//		if(emp.getEmpSalary()==0.0)
+//			throw new NotEmptyException("Employee Salary should not be empty.");
+//		
 		repository.save(emp);
 	}
 	

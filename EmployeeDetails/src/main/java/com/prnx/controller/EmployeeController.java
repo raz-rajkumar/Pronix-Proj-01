@@ -17,6 +17,7 @@ import com.prnx.exceptionHandling.EmployeeNotFoundException;
 import com.prnx.service.EmployeeService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 @RestController
 public class EmployeeController {
@@ -39,7 +40,7 @@ public class EmployeeController {
 	
 	
 	@PostMapping("/save")
-	public List<Employee> save( @RequestBody Employee emp)
+	public List<Employee> save(@Valid @RequestBody Employee emp)
 	{
 		service.save(emp);
 		return service.getEmployees();
