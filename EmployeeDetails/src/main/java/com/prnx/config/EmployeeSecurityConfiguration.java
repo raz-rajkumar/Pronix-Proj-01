@@ -48,7 +48,9 @@ public class EmployeeSecurityConfiguration {
 				.csrf(csrf -> csrf.disable())
 				.formLogin(Customizer.withDefaults())
 				.httpBasic(Customizer.withDefaults())
-				.authorizeHttpRequests(configurer -> configurer.requestMatchers("/allEmployees", "/home")
+				.authorizeHttpRequests(configurer -> 
+				configurer
+				.requestMatchers("/allEmployees", "/home","/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**")
 				.permitAll()
 				.requestMatchers("/deleteEmployee/**")
 				.hasRole("MANAGER")

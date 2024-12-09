@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.prnx.entity.Student;
 import com.prnx.service.StudentService;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/std")
@@ -30,7 +32,7 @@ public class StudentRestController {
 	}
 	
 	@PostMapping("/save")
-	public Student saveStudent(@RequestBody Student std)
+	public Student saveStudent(@Valid @RequestBody Student std)
 	{
 		return service.saveStudentDetails(std);
 	}

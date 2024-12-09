@@ -39,15 +39,18 @@ public class StudentConfiguration {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		http.authorizeHttpRequests(
-				configurer -> configurer.requestMatchers(HttpMethod.GET, "std/getAll").permitAll()
-				.requestMatchers(HttpMethod.DELETE,"std/delete/**").hasRole("MANAGER")
-				.requestMatchers(HttpMethod.GET,"std/getById/**").hasRole("ADMIN")
-				.requestMatchers(HttpMethod.PUT,"std/update/**").hasRole("ADMIN")
-				.requestMatchers(HttpMethod.POST,"std/save").hasRole("ADMIN"));
+				configurer -> configurer.requestMatchers(HttpMethod.GET, "/std/getAll","/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()
+				.requestMatchers(HttpMethod.DELETE,"/std/delete/**").hasRole("MANAGER")
+				.requestMatchers(HttpMethod.GET,"/std/getById/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.PUT,"/std/update/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.POST,"/std/save").hasRole("ADMIN")
+				);
 
 		http.httpBasic(Customizer.withDefaults());
 
 		http.csrf(csrf -> csrf.disable());
 		return http.build();
 	}
+	
+	
 }
