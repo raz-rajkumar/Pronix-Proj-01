@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +32,7 @@ public class EmployeeController {
 		return "WELCOME TO PRONIX IT SOLUTIONS"+"\n"+req.getSession().getId();
 	}
 	
-	
+	@PreAuthorize("hasRole('User')")
 	@GetMapping("/allEmployees")
 	public List<Employee> allEmployees()
 	{
@@ -46,6 +47,7 @@ public class EmployeeController {
 		return service.getEmployees();
 	}
 	
+	@PreAuthorize("hasRole('Admin')")
 	@GetMapping("/findEmployee/{id}")
 	public Employee findEmployee(@PathVariable Long id )
 	{
