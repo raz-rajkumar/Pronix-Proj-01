@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.prnx.entity.Role;
 import com.prnx.entity.Users;
-import com.prnx.exceptionHandling.RoleRepository;
+import com.prnx.repository.RoleRepository;
 import com.prnx.repository.UserRepository;
 
 @Service

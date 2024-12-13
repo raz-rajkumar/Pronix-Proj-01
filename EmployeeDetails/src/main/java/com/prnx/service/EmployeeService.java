@@ -5,10 +5,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import com.prnx.entity.Employee;
 import com.prnx.exceptionHandling.EmployeeNotFoundException;
-import com.prnx.exceptionHandling.NotEmptyException;
 import com.prnx.repository.EmployeeRepository;
 
 @Service
@@ -44,16 +44,24 @@ public class EmployeeService {
 		return repository.findById(id);
 	}
 	
-	public Employee update(Long id,Employee emp)
+	public Employee update(Long id,Employee emp) throws Exception
 	{
 		Optional<Employee> byId = repository.findById(id);
 		if(byId.isPresent())
 		{
 			Employee emp1=byId.get();
-			emp1.setEmpName(emp.getEmpName());
-			emp1.setEmpDepartment(emp.getEmpDepartment());
-			emp1.setEmpDesignation(emp.getEmpDesignation());
-			emp1.setEmpSalary(emp.getEmpSalary());
+			if(emp.getEmpName()!=null)
+				emp1.setEmpName(emp.getEmpName());
+			if(emp.getEmpDepartment()!=null)
+				emp1.setEmpDepartment(emp.getEmpDepartment());
+			if(emp.getEmpDesignation()!=null)
+				emp1.setEmpDesignation(emp.getEmpDesignation());
+			if(emp.getEmpSalary()!=null)
+				emp1.setEmpSalary(emp.getEmpSalary());
+			if(emp.getEmpName()=="" ||emp.getEmpDepartment()==""|| emp.getEmpDesignation()==""||emp.getEmpSalary()==0)
+			{
+				throw new Exception("Field should not be empty!");
+			}
 			repository.save(emp1);
 			return repository.findById(id).get();
 		}

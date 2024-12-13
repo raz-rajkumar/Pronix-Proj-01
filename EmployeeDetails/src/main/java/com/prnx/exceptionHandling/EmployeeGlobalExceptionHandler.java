@@ -35,7 +35,10 @@ public class EmployeeGlobalExceptionHandler {
 	public ResponseEntity<EmployeeErrorResponse> handleException(Exception exc) {
 		EmployeeErrorResponse error = new EmployeeErrorResponse();
 		error.setStatus(HttpStatus.BAD_REQUEST.value());
-		error.setMessage("Please Enter a valid Id");
+		if(exc.getMessage()!=null)
+			error.setMessage(exc.getMessage());
+		else
+			error.setMessage("Please Enter a valid Id");
 		error.setTimeStamp(System.currentTimeMillis());
 
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);

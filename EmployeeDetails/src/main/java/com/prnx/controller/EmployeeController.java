@@ -32,14 +32,14 @@ public class EmployeeController {
 		return "WELCOME TO PRONIX IT SOLUTIONS"+"\n"+req.getSession().getId();
 	}
 	
-	@PreAuthorize("hasRole('User')")
+	@PreAuthorize("hasRole('ROLE_Admin')")
 	@GetMapping("/allEmployees")
 	public List<Employee> allEmployees()
 	{
 		return service.getEmployees();
 	}
 	
-	
+	@PreAuthorize("hasRole('User')")
 	@PostMapping("/save")
 	public List<Employee> save(@Valid @RequestBody Employee emp)
 	{
@@ -60,7 +60,7 @@ public class EmployeeController {
 	
 	
 	@PutMapping("updateEmployee/{id}")
-	public Employee udateEmployee(@PathVariable Long id, @RequestBody Employee emp)
+	public Employee udateEmployee(@PathVariable Long id, @RequestBody Employee emp) throws Exception
 	{
 		return service.update(id, emp);
 	}

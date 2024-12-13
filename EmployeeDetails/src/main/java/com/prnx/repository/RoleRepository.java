@@ -1,4 +1,4 @@
-package com.prnx.exceptionHandling;
+package com.prnx.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

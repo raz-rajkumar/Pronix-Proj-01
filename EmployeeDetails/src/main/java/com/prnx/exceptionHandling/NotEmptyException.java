@@ -2,6 +2,11 @@ package com.prnx.exceptionHandling;
 
 public class NotEmptyException extends RuntimeException{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public NotEmptyException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
